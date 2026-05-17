@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <div class="site-container">
+      <div id="cli" class="cli hidden">
+        <div id="output"></div>
+
+        <div class="input-line">
+          <span>&gt;</span>
+          <input id="cmdInput" autocomplete="off" />
+        </div>
+      </div>
+
+      <nav>
+        <div class="container nav-container">
+          <h1>D M</h1>
+
+          <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+            <a href="#about">About</a>
+            <a href="#" id="cliToggle">CLI Mode</a>
+          </div>
+        </div>
+      </nav>
+
+      <section class="about" id="about">
+        <div class="container about-container">
+          <div class="profile-frame">
+            <img src="./images/image1.jpeg" alt="profile" />
+          </div>
+
+          <div class="about-text">
+            <h2 class="terminal-title">About Me:</h2>
+
+            <p class="typing-line">Dickson Morais</p>
+
+            <p class="typing-line">
+              Junior Full-Stack Software Engineer with experience building
+              responsive web applications using React, JavaScript, Node.js,
+              MongoDB, and SQL.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="hero">
+        <div class="container">
+          <h2 class="terminal-title">Full-Stack Software Engineer:</h2>
+
+          <p>
+            Initializing portfolio...<br />
+            Loading React, JavaScript, Node.js, MongoDB, and SQL projects...<br />
+            System ready.
+          </p>
+
+          <a href="#projects" class="btn">View Projects</a>
+        </div>
+      </section>
+
+      <section id="projects" class="projects">
+        <div class="container">
+          <h2 class="terminal-title">My Projects:</h2>
+
+          <div class="grid">
+            <div class="card">
+              <a href="https://dailynews.myweeklynews.us/" target="_blank">
+                <img src="./images/ert1.jpg" alt="project" />
+              </a>
+
+              <div class="card-content">
+                <h3>Project One</h3>
+                <p>
+                  React application with API integration and authentication.
+                </p>
+              </div>
+            </div>
+
+            <div class="card">
+              <a href="https://wardrop.myweeklynews.us/" target="_blank">
+                <img src="./images/ert2dd.jpg" alt="project" />
+              </a>
+
+              <div class="card-content">
+                <h3>Project Two</h3>
+                <p>Full-stack dashboard built with Node.js and MongoDB.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact">
+        <div class="container">
+          <h2 class="terminal-title">Contact:</h2>
+
+          <p>
+            &gt; Email:
+            <a href="mailto:dicmora2@email.com">dicmora2@email.com</a>
+          </p>
+
+          <p>
+            &gt; GitHub:
+            <a href="https://github.com/dicmora" target="_blank">
+              github.com/dicmora
+            </a>
+          </p>
+
+          <p>
+            &gt; LinkedIn:
+            <a href="https://www.linkedin.com/in/dicksonmorais" target="_blank">
+              linkedin.com/in/dicksonmorais
+            </a>
+          </p>
+        </div>
+      </section>
+
+      <footer>
+        <div class="container">
+          <p>© 2026 Dickson Morais</p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
