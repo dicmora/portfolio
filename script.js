@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggle = document.getElementById("cliToggle");
   const input = document.getElementById("cmdInput");
   const output = document.getElementById("output");
+  const heroSection = document.querySelector(".hero");
 
   /* ABOUT SECTION TYPING */
   const aboutSection = document.querySelector(".about");

@@ -303,7 +303,21 @@ nav h1 {
   color: #000;
   box-shadow: 0 0 20px #00ff66;
 }
+.btn-resume {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 14px 28px;
+  border: 1px solid #00ff66;
+  color: #00ff66;
+  text-decoration: none;
+  background: transparent;
+}
 
+.btn-resume:hover {
+  background: #00ff66;
+  color: #000;
+  box-shadow: 0 0 20px #00ff66;
+}
 /* PROJECTS */
 .projects {
   padding: 80px 0;
