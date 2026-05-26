@@ -3,10 +3,41 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggle = document.getElementById("cliToggle");
   const input = document.getElementById("cmdInput");
   const output = document.getElementById("output");
-  const heroSection = document.querySelector(".hero");
+
+  /* HERO TYPING ANIMATION */
+  const heroTyping = document.getElementById("heroTyping");
+  const statusLine = document.getElementById("statusLine");
+  const loadedLine = document.getElementById("loadedLine");
+
+  const heroText =
+    "Building scalable applications with modern web technologies.";
+
+  function typeHeroText() {
+    let index = 0;
+
+    setTimeout(() => {
+      const typing = setInterval(() => {
+        heroTyping.textContent += heroText.charAt(index);
+        index++;
+
+        if (index >= heroText.length) {
+          clearInterval(typing);
+
+          setTimeout(() => {
+            statusLine.classList.remove("hidden-line");
+          }, 500);
+
+          setTimeout(() => {
+            loadedLine.classList.remove("hidden-line");
+          }, 1000);
+        }
+      }, 45);
+    }, 1600);
+  }
 
   /* ABOUT SECTION TYPING */
   const aboutSection = document.querySelector(".about");
+
   const typingElements = document.querySelectorAll(
     ".about .terminal-title, .about .typing-line",
   );
@@ -53,20 +84,17 @@ document.addEventListener("DOMContentLoaded", () => {
     typingElements[typingElements.length - 1].classList.add("cursor-active");
   }
 
-  if (aboutSection && typingElements.length > 0) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          startAboutAnimation();
-        }
-      },
-      {
-        threshold: 0.35,
-      },
-    );
+  async function initializePortfolio() {
+    await startAboutAnimation();
 
-    observer.observe(aboutSection);
+    await new Promise((resolve) => setTimeout(resolve, 700));
+
+    if (heroTyping && statusLine && loadedLine) {
+      typeHeroText();
+    }
   }
+
+  initializePortfolio();
 
   /* CLI SAFETY CHECK */
   if (!cli || !toggle || !input || !output) {

@@ -428,6 +428,19 @@ footer {
   text-align: center;
   padding: 30px 0;
 }
+.hero-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 22px;
+  margin-left: 5px;
+  background: #00ff66;
+  vertical-align: middle;
+  animation: blink 0.8s infinite;
+}
+
+.hidden-line {
+  visibility: hidden;
+}
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
