@@ -9,8 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const statusLine = document.getElementById("statusLine");
   const loadedLine = document.getElementById("loadedLine");
 
-  const heroText =
-    "Building scalable applications with modern web technologies.";
+  const heroText = ` 
+  Building scalable applications with modern web technologies.
+  Designing responsive user interfaces and scalable backend systems.
+  Transforming ideas into real-world digital experiences.
+  `;
 
   function typeHeroText() {
     let index = 0;
@@ -29,6 +32,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
           setTimeout(() => {
             loadedLine.classList.remove("hidden-line");
+
+            // REMOVE LOADING BLOCK
+            document.getElementById("loadingLines").remove();
           }, 1000);
         }
       }, 45);
