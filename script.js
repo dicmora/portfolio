@@ -33,8 +33,10 @@ document.addEventListener("DOMContentLoaded", () => {
           setTimeout(() => {
             loadedLine.classList.remove("hidden-line");
 
-            // REMOVE LOADING BLOCK
-            document.getElementById("loadingLines").remove();
+            const loadingLines = document.getElementById("loadingLines");
+            if (loadingLines) {
+              loadingLines.remove();
+            }
           }, 1000);
         }
       }, 45);
@@ -109,9 +111,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   output.innerHTML = `
-Welcome to CLI Portfolio 
-
-Type 'help' to see available commands
+Welcome to CLI Portfolio<br><br>
+Type 'help' to see available commands<br><br>
 `;
 
   toggle.addEventListener("click", (e) => {
@@ -165,7 +166,7 @@ LinkedIn: linkedin.com/in/dicksonmorais
 
     const cmd = input.value.trim().toLowerCase();
 
-    output.innerHTML += `\n> ${cmd}\n`;
+    output.innerHTML += `<br>&gt; ${cmd}<br>`;
 
     if (cmd === "clear") {
       output.innerHTML = "";
@@ -180,7 +181,10 @@ LinkedIn: linkedin.com/in/dicksonmorais
     }
 
     output.innerHTML +=
-      (commands[cmd] || "Command not found. Type 'help'") + "\n";
+      (commands[cmd] || "Command not found. Type 'help'").replace(
+        /\n/g,
+        "<br>",
+      ) + "<br>";
 
     output.scrollTop = output.scrollHeight;
 

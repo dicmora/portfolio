@@ -9,33 +9,63 @@ html {
 }
 
 body {
-  background: #000;
+  background: #020806;
   color: #00ff66;
   font-family: "Courier New", monospace;
+  position: relative;
+  overflow-x: hidden;
 }
 
+/* FAINT MATRIX GRID BACKGROUND */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(0, 255, 100, 0.04),
-    rgba(0, 255, 100, 0.04) 1px,
-    transparent 2px,
-    transparent 4px
-  );
+  pointer-events: none;
+  z-index: -2;
+  opacity: 0.08;
+  background-image:
+    linear-gradient(rgba(0, 255, 120, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 120, 0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+  animation: matrixMove 14s linear infinite;
+}
+
+/* SOFT SCANLINE EFFECT */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
   pointer-events: none;
   z-index: 9999;
+  opacity: 0.06;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 255, 120, 0.12),
+    rgba(0, 255, 120, 0.12) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+}
+
+@keyframes matrixMove {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 300px;
+  }
 }
 
 .site-container {
   max-width: 1200px;
   margin: 40px auto;
   padding: 30px;
-  background: #050807;
+  background: rgba(5, 8, 7, 0.92);
   border: 1px solid #00ff66;
   box-shadow: 0 0 25px rgba(0, 255, 100, 0.25);
+  position: relative;
+  z-index: 1;
 }
 
 .container {
@@ -177,7 +207,6 @@ nav h1 {
   color: #00ff66;
   font-family: "Courier New", monospace;
   margin-bottom: 8px;
-  padding-bottom: 0;
   min-height: 34px;
 }
 
@@ -289,21 +318,7 @@ nav h1 {
   font-size: 3.2rem;
 }
 
-.btn {
-  display: inline-block;
-  margin-top: 25px;
-  padding: 14px 28px;
-  border: 1px solid #00ff66;
-  color: #00ff66;
-  text-decoration: none;
-  background: transparent;
-}
-
-.btn:hover {
-  background: #00ff66;
-  color: #000;
-  box-shadow: 0 0 20px #00ff66;
-}
+.btn,
 .btn-resume {
   display: inline-block;
   margin-top: 25px;
@@ -314,11 +329,13 @@ nav h1 {
   background: transparent;
 }
 
+.btn:hover,
 .btn-resume:hover {
   background: #00ff66;
   color: #000;
   box-shadow: 0 0 20px #00ff66;
 }
+
 /* PROJECTS */
 .projects {
   padding: 80px 0;
@@ -392,7 +409,7 @@ nav h1 {
   color: #00ff66;
   font-family: "Courier New", monospace;
   padding: 30px;
-  z-index: 999;
+  z-index: 10000;
   overflow-y: auto;
 }
 
@@ -415,20 +432,24 @@ nav h1 {
   font-size: 16px;
   font-family: inherit;
 }
+
 #contact {
   margin-top: 40px;
   margin-bottom: 0;
 }
+
 #social {
   margin-top: 40px;
   margin-bottom: 0;
 }
+
 /* FOOTER */
 footer {
   color: #00ff66;
   text-align: center;
   padding: 30px 0;
 }
+
 .hero-cursor {
   display: inline-block;
   width: 3px;
