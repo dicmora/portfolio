@@ -93,16 +93,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function initializePortfolio() {
+    await runBootSequence();
+
     await startAboutAnimation();
 
-    await new Promise((resolve) => setTimeout(resolve, 700));
+    await wait(700);
 
     if (heroTyping && statusLine && loadedLine) {
       typeHeroText();
     }
   }
-
-  initializePortfolio();
 
   /* CLI SAFETY CHECK */
   if (!cli || !toggle || !input || !output) {
@@ -123,7 +123,124 @@ Type 'help' to see available commands<br><br>
       input.focus();
     }
   });
+  /* =====================================
+     MATRIX LOADING SCREEN
+  ===================================== */
 
+  const matrixLoader = document.getElementById("matrixLoader");
+  const matrixCanvas = document.getElementById("matrixCanvas");
+  const matrixContext = matrixCanvas?.getContext("2d");
+
+  document.body.classList.add("loading");
+
+  let matrixAnimation;
+  let matrixDrops = [];
+  let matrixFontSize = 16;
+  let matrixColumns = 0;
+
+  const matrixCharacters =
+    "01ABCDEFGHIJKLMNOPQRSTUVWXYZアイウエオカキクケコサシスセソ";
+
+  function resizeMatrixCanvas() {
+    if (!matrixCanvas || !matrixContext) return;
+
+    const pixelRatio = window.devicePixelRatio || 1;
+
+    matrixCanvas.width = window.innerWidth * pixelRatio;
+    matrixCanvas.height = window.innerHeight * pixelRatio;
+
+    matrixCanvas.style.width = `${window.innerWidth}px`;
+    matrixCanvas.style.height = `${window.innerHeight}px`;
+
+    matrixContext.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+
+    matrixColumns = Math.floor(window.innerWidth / matrixFontSize);
+    matrixDrops = Array(matrixColumns).fill(1);
+  }
+
+  function drawMatrixRain() {
+    if (!matrixContext) return;
+
+    matrixContext.fillStyle = "rgba(0, 0, 0, 0.08)";
+    matrixContext.fillRect(0, 0, window.innerWidth, window.innerHeight);
+
+    matrixContext.font = `${matrixFontSize}px "Courier New", monospace`;
+
+    for (let column = 0; column < matrixDrops.length; column++) {
+      const character =
+        matrixCharacters[Math.floor(Math.random() * matrixCharacters.length)];
+
+      const x = column * matrixFontSize;
+      const y = matrixDrops[column] * matrixFontSize;
+
+      // Occasional brighter leading character
+      if (Math.random() > 0.96) {
+        matrixContext.fillStyle = "#d5ffe5";
+        matrixContext.shadowBlur = 12;
+        matrixContext.shadowColor = "#00ff66";
+      } else {
+        matrixContext.fillStyle = "#00ff66";
+        matrixContext.shadowBlur = 4;
+        matrixContext.shadowColor = "#00ff66";
+      }
+
+      matrixContext.fillText(character, x, y);
+      matrixContext.shadowBlur = 0;
+
+      if (y > window.innerHeight && Math.random() > 0.975) {
+        matrixDrops[column] = 0;
+      }
+
+      matrixDrops[column]++;
+    }
+
+    matrixAnimation = requestAnimationFrame(drawMatrixRain);
+  }
+
+  function wait(milliseconds) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, milliseconds);
+    });
+  }
+
+  async function runBootSequence() {
+    const bootLines = [
+      document.getElementById("bootLine1"),
+      document.getElementById("bootLine2"),
+      document.getElementById("bootLine3"),
+      document.getElementById("bootLine4"),
+      document.getElementById("bootLine5"),
+    ];
+
+    const delays = [1000, 1500, 1500, 1200, 1200];
+
+    for (let index = 0; index < bootLines.length; index++) {
+      await wait(delays[index]);
+
+      if (bootLines[index]) {
+        bootLines[index].classList.add("visible");
+      }
+    }
+
+    await wait(7000);
+
+    matrixLoader?.classList.add("fade-out");
+    document.body.classList.remove("loading");
+
+    await wait(3000);
+
+    cancelAnimationFrame(matrixAnimation);
+    matrixLoader?.remove();
+  }
+
+  if (matrixCanvas && matrixContext) {
+    resizeMatrixCanvas();
+    drawMatrixRain();
+
+    window.addEventListener("resize", resizeMatrixCanvas);
+  }
+
+  initializePortfolio();
   const commands = {
     help: `
 Available commands:

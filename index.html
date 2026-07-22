@@ -8,6 +8,38 @@
   </head>
 
   <body>
+  <!-- MATRIX LOADING SCREEN -->
+  <div id="matrixLoader" class="matrix-loader">
+    <canvas id="matrixCanvas"></canvas>
+
+    <div class="matrix-loader-content">
+      <h1 class="matrix-logo">DM</h1>
+
+      <div class="boot-terminal">
+        <p id="bootLine1" class="boot-line">
+          &gt; Initializing portfolio...
+        </p>
+
+        <p id="bootLine2" class="boot-line">
+          &gt; Loading developer environment...
+        </p>
+
+        <p id="bootLine3" class="boot-line">
+          &gt; Connecting frontend and backend services...
+        </p>
+
+        <p id="bootLine4" class="boot-line boot-success">
+          &gt; System Status: ONLINE
+        </p>
+
+        <p id="bootLine5" class="boot-line boot-success">
+          &gt; Portfolio Loaded Successfully.
+        </p>
+
+        <span class="boot-cursor"></span>
+      </div>
+    </div>
+  </div>
     <div class="site-container">
       <div id="cli" class="cli hidden">
         <div id="output"></div>

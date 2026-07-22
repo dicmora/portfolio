@@ -501,3 +501,162 @@ footer {
     height: 240px;
   }
 }
+/* =====================================
+   MATRIX LOADING SCREEN
+===================================== */
+
+.matrix-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 20000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #000;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 2.5s ease,
+    visibility 2.5s ease;
+}
+
+.matrix-loader.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+#matrixCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.65;
+}
+
+.matrix-loader::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(0, 20, 8, 0.2) 0%,
+      rgba(0, 0, 0, 0.82) 75%
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 3px,
+      rgba(0, 255, 102, 0.04) 4px
+    );
+}
+
+.matrix-loader-content {
+  position: relative;
+  z-index: 2;
+  width: min(650px, 88%);
+  padding: 40px;
+  border: 1px solid rgba(0, 255, 102, 0.7);
+  background: rgba(0, 5, 2, 0.85);
+  box-shadow:
+    0 0 15px rgba(0, 255, 102, 0.35),
+    inset 0 0 25px rgba(0, 255, 102, 0.08);
+}
+
+.matrix-logo {
+  margin-bottom: 30px;
+  color: #00ff66;
+  font-family: "Courier New", monospace;
+  font-size: 3rem;
+  letter-spacing: 8px;
+  text-align: center;
+  text-shadow:
+    0 0 8px #00ff66,
+    0 0 25px rgba(0, 255, 102, 0.8);
+  animation: matrixLogoPulse 1.2s ease-in-out infinite alternate;
+}
+
+.boot-terminal {
+  min-height: 190px;
+  font-family: "Courier New", monospace;
+}
+
+.boot-line {
+  display: none;
+  margin: 10px 0;
+  color: #a7d8e8;
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateY(5px);
+}
+
+.boot-line.visible {
+  display: block;
+  animation: showBootLine 0.35s ease forwards;
+}
+
+.boot-success {
+  color: #00ff66;
+  text-shadow: 0 0 8px rgba(0, 255, 102, 0.65);
+}
+
+.boot-cursor {
+  display: inline-block;
+  width: 10px;
+  height: 20px;
+  margin-top: 8px;
+  background: #00ff66;
+  box-shadow: 0 0 8px #00ff66;
+  animation: blink 0.8s infinite;
+}
+
+body.loading {
+  overflow: hidden;
+}
+
+@keyframes showBootLine {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes matrixLogoPulse {
+  from {
+    opacity: 0.7;
+    text-shadow: 0 0 5px #00ff66;
+  }
+
+  to {
+    opacity: 1;
+    text-shadow:
+      0 0 10px #00ff66,
+      0 0 30px rgba(0, 255, 102, 0.9);
+  }
+}
+
+@media (max-width: 600px) {
+  .matrix-loader-content {
+    padding: 28px 20px;
+  }
+
+  .matrix-logo {
+    font-size: 2.3rem;
+  }
+
+  .boot-line {
+    font-size: 0.82rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .matrix-loader,
+  .matrix-logo,
+  .boot-line,
+  .boot-cursor {
+    animation: none;
+  }
+}
