@@ -637,7 +637,103 @@ body.loading {
       0 0 30px rgba(0, 255, 102, 0.9);
   }
 }
+.developer-card {
+  width: 280px;
+  min-height: 280px;
+  overflow: hidden;
+  border: 1px solid #00ff88;
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at center, rgba(0, 255, 136, 0.1), transparent 65%),
+    #020806;
+  box-shadow:
+    0 0 20px rgba(0, 255, 136, 0.15),
+    inset 0 0 25px rgba(0, 255, 136, 0.04);
+  font-family: "Courier New", monospace;
+}
 
+.developer-card-header {
+  display: flex;
+  gap: 7px;
+  padding: 12px;
+  border-bottom: 1px solid rgba(0, 255, 136, 0.25);
+  background: rgba(0, 255, 136, 0.05);
+}
+
+.developer-card-header span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #00ff88;
+  opacity: 0.65;
+}
+
+.developer-card-body {
+  padding: 20px;
+  color: #b9e8e8;
+}
+
+.code-comment {
+  margin: 0 0 18px;
+  color: #637b76;
+}
+
+.developer-initials {
+  display: grid;
+  width: 78px;
+  height: 78px;
+  margin-bottom: 20px;
+  place-items: center;
+  border: 1px solid #00ff88;
+  border-radius: 10px;
+  color: #00ff88;
+  font-size: 32px;
+  font-weight: bold;
+  box-shadow: 0 0 18px rgba(0, 255, 136, 0.2);
+}
+
+.developer-card-body p {
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.developer-card-body p span {
+  color: #00d9ff;
+}
+
+.developer-card-body strong {
+  color: #00ff88;
+  font-weight: normal;
+}
+
+.code-line {
+  margin-top: 22px;
+  color: #00ff88;
+  font-size: 13px;
+}
+
+.code-cursor {
+  display: inline-block;
+  width: 7px;
+  height: 14px;
+  margin-left: 5px;
+  vertical-align: middle;
+  background: #00ff88;
+  animation: cursorBlink 0.8s infinite;
+}
+
+@keyframes cursorBlink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .developer-card {
+    width: min(100%, 320px);
+    margin: 0 auto;
+  }
+}
 @media (max-width: 600px) {
   .matrix-loader-content {
     padding: 28px 20px;
