@@ -308,3 +308,70 @@ LinkedIn: linkedin.com/in/dicksonmorais
     input.value = "";
   });
 });
+
+const initialsCanvas = document.getElementById("initialsCanvas");
+
+if (initialsCanvas) {
+  const ctx = initialsCanvas.getContext("2d");
+  const width = 360;
+  const height = 220;
+
+  initialsCanvas.width = width;
+  initialsCanvas.height = height;
+
+  const textCanvas = document.createElement("canvas");
+  const textCtx = textCanvas.getContext("2d");
+
+  textCanvas.width = width;
+  textCanvas.height = height;
+
+  textCtx.fillStyle = "#ffffff";
+  textCtx.font = "bold 175px Georgia";
+  textCtx.textAlign = "center";
+  textCtx.textBaseline = "middle";
+  textCtx.fillText("DM", width / 2, height / 2 + 5);
+
+  const pixels = textCtx.getImageData(0, 0, width, height).data;
+  const dots = [];
+  const spacing = 10;
+
+  for (let y = 0; y < height; y += spacing) {
+    for (let x = 0; x < width; x += spacing) {
+      const pixelIndex = (y * width + x) * 4;
+
+      if (pixels[pixelIndex + 3] > 128) {
+        dots.push({
+          x,
+          y,
+          opacity: 0.65 + Math.random() * 0.35,
+          targetOpacity: 1,
+          speed: 0.025 + Math.random() * 0.035,
+        });
+      }
+    }
+  }
+
+  function animateInitials() {
+    ctx.clearRect(0, 0, width, height);
+
+    dots.forEach((dot) => {
+      // Occasionally make a dot disappear or reappear
+      if (Math.random() < 0.008) {
+        dot.targetOpacity = dot.targetOpacity === 1 ? 0.15 : 1;
+      }
+
+      dot.opacity += (dot.targetOpacity - dot.opacity) * dot.speed;
+
+      ctx.beginPath();
+      ctx.arc(dot.x, dot.y, 3, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(170, 210, 220, ${dot.opacity})`;
+      ctx.shadowColor = "#a9d6df";
+      ctx.shadowBlur = dot.opacity > 0.7 ? 3 : 0;
+      ctx.fill();
+    });
+
+    requestAnimationFrame(animateInitials);
+  }
+
+  animateInitials();
+}
